@@ -69,6 +69,35 @@ python main.py
 COHERE_API_KEY=your_cohere_api_key_here
 ```
 
+### CSV File Path Configuration
+
+The CSV file path is configured in `config.py`:
+
+```python
+CSV_FILE_PATH = "data/competitor_data.csv"
+```
+
+To use a different CSV file:
+
+1. **Option 1: Modify config.py directly**
+   ```python
+   CSV_FILE_PATH = "path/to/your/custom_data.csv"
+   ```
+
+2. **Option 2: Use environment variable**
+   Add to your `.env` file:
+   ```
+   CSV_FILE_PATH=path/to/your/custom_data.csv
+   ```
+   
+   Then update `config.py` to read from environment:
+   ```python
+   CSV_FILE_PATH = os.getenv("CSV_FILE_PATH", "data/competitor_data.csv")
+   ```
+
+3. **Option 3: Place your CSV in the data/ folder**
+   Replace the existing `data/competitor_data.csv` file with your own data
+
 ### CSV Data Format
 The system expects a CSV file with the following columns:
 - `Competitor Name`: Name of the competitor company
