@@ -39,28 +39,95 @@ mkdir competitive_analysis_agent
 cd competitive_analysis_agent
 ```
 
-2. **Save each module as separate Python files** with the names shown in the project structure
+2. **Create a virtual environment:**
 
-3. **Create the data directory:**
+   **Option A: Using venv (Python 3.3+)**
+   ```bash
+   # Create virtual environment
+   python -m venv venv
+   
+   # Activate virtual environment
+   # On Windows:
+   venv\Scripts\activate
+   
+   # On macOS/Linux:
+   source venv/bin/activate
+   ```
+
+   **Option B: Using conda**
+   ```bash
+   # Create virtual environment
+   conda create -n competitive_analysis python=3.9
+   
+   # Activate virtual environment
+   conda activate competitive_analysis
+   ```
+
+   **Option C: Using virtualenv**
+   ```bash
+   # Install virtualenv if not already installed
+   pip install virtualenv
+   
+   # Create virtual environment
+   virtualenv venv
+   
+   # Activate virtual environment
+   # On Windows:
+   venv\Scripts\activate
+   
+   # On macOS/Linux:
+   source venv/bin/activate
+   ```
+
+3. **Save each module as separate Python files** with the names shown in the project structure
+
+4. **Create the data directory:**
 ```bash
 mkdir data
 ```
 
-4. **Install dependencies:**
+5. **Install dependencies:**
 ```bash
+# Make sure your virtual environment is activated first
 pip install -r requirements.txt
 ```
 
-5. **Set up environment variables:**
+6. **Set up environment variables:**
 ```bash
 cp .env.example .env
 # Edit .env and add your Cohere API key
 ```
 
-6. **Run the application:**
+7. **Run the application:**
 ```bash
+# Make sure your virtual environment is activated
 python main.py
 ```
+
+### 🔄 Virtual Environment Management
+
+**To deactivate the virtual environment:**
+```bash
+deactivate
+```
+
+**To reactivate for future use:**
+```bash
+# For venv/virtualenv:
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+# For conda:
+conda activate competitive_analysis
+```
+
+**Why use a virtual environment?**
+- Isolates project dependencies from system Python
+- Prevents version conflicts between different projects  
+- Makes the project portable and reproducible
+- Easier to manage and track dependencies
 
 ## 🔧 Configuration
 

@@ -2,10 +2,14 @@
 Configuration and constants for the Competitive Analysis Agent
 """
 import os
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
+# Load environment variables (optional - works without .env file)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # dotenv not available, will use system environment variables
+    pass
 
 # API Configuration
 COHERE_API_KEY = os.getenv("COHERE_API_KEY")
@@ -45,6 +49,7 @@ Instructions:
 
 Answer:"""
 
-# Validation
-if not COHERE_API_KEY:
-    raise ValueError("Please set your COHERE_API_KEY in the .env file")
+# Validation - Don't raise error on import, let the app handle it
+# This allows the module to be imported even without API key configured
+# The application will handle the missing API key gracefully
+COHERE_API_KEY_CONFIGURED = bool(COHERE_API_KEY and COHERE_API_KEY.strip())

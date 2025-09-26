@@ -19,9 +19,9 @@ LLM_MODEL = "command-r-plus"
 MAX_HISTORY_SIZE = 5
 SIMILARITY_TOP_K = 5
 
-# Validation
-if not COHERE_API_KEY:
-    raise ValueError("Please set your COHERE_API_KEY in the .env file")
+# Validation - Don't raise error on import, let the app handle it
+# This allows the module to be imported even without API key configured
+COHERE_API_KEY_CONFIGURED = bool(COHERE_API_KEY and COHERE_API_KEY.strip())
 
 # ============================================================================
 # File: data_processor.py
@@ -136,7 +136,7 @@ from typing import List
 from llama_index.core import Document, VectorStoreIndex, Settings
 from llama_index.embeddings.cohere import CohereEmbedding
 from llama_index.llms.cohere import Cohere
-from config import COHERE_API_KEY, EMBEDDING_MODEL, LLM_MODEL
+from config import COHERE_API_KEY, EMBEDDING_MODEL, LLM_MODEL, COHERE_API_KEY_CONFIGURED
 
 logger = logging.getLogger(__name__)
 

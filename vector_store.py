@@ -10,7 +10,7 @@ from llama_index.llms.cohere import Cohere
 from config import (
     COHERE_API_KEY, EMBEDDING_MODEL, LLM_MODEL,
     COHERE_TEMPERATURE, COHERE_MAX_TOKENS, COHERE_P,
-    EMBEDDING_TRUNCATE, SYSTEM_PROMPT, QUERY_PROMPT_TEMPLATE
+    EMBEDDING_TRUNCATE, SYSTEM_PROMPT, QUERY_PROMPT_TEMPLATE, COHERE_API_KEY_CONFIGURED
 )
 from cohere.errors import (
     TooManyRequestsError, UnauthorizedError, BadRequestError, 
@@ -52,7 +52,7 @@ def initialize_llm_settings(max_retries: int = 3, retry_delay: float = 1.0):
     for attempt in range(max_retries):
         try:
             # Validate API key
-            if not COHERE_API_KEY or COHERE_API_KEY.strip() == "":
+            if not COHERE_API_KEY_CONFIGURED:
                 raise ValueError("COHERE_API_KEY is not set or is empty. Please check your .env file.")
             
             # Initialize embedding model with optimized settings for embed-english-v3.0
@@ -232,7 +232,7 @@ def configure_embedding_for_search(max_retries: int = 2):
     """Configure embedding model for search queries with error handling"""
     for attempt in range(max_retries):
         try:
-            if not COHERE_API_KEY or COHERE_API_KEY.strip() == "":
+            if not COHERE_API_KEY_CONFIGURED:
                 raise ValueError("COHERE_API_KEY is not set or is empty")
                 
             Settings.embed_model = CohereEmbedding(
@@ -287,7 +287,7 @@ def configure_embedding_for_indexing(max_retries: int = 2):
     """Configure embedding model for document indexing with error handling"""
     for attempt in range(max_retries):
         try:
-            if not COHERE_API_KEY or COHERE_API_KEY.strip() == "":
+            if not COHERE_API_KEY_CONFIGURED:
                 raise ValueError("COHERE_API_KEY is not set or is empty")
                 
             Settings.embed_model = CohereEmbedding(
